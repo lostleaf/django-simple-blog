@@ -1,0 +1,31 @@
+body{
+  padding-top: 5em;
+}
+
+.footer{
+  margin-top: 30px;
+}
+
+.c-cta{
+  margin: 2em 0;
+}
+
+#testimonials {
+  position: relative;
+}
+
+#testimonials .carousel-indicators{
+  top: -30px;
+}
+
+#testimonials .carousel-indicators li{
+  background-color: #ccc;
+}
+
+#testimonials .carousel-indicators li.active{
+  background-color: black;
+}
+
+#testimonials .carousel-inner .item{
+  margin-left: 40px;
+}

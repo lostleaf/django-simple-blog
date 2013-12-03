@@ -1,0 +1,44 @@
+{% extends 'blog_base.html' %}
+
+{% block content %}
+<div class='row'>
+  <div class='span8'>
+    <h1>Doraemon</h1>
+    <p class='lead'>
+       I am a robotic cat named Doraemon. <br>
+       I traveled back in time from the 22nd century. <br>
+       I am aiding a pre-teen boy called Nobita Nobi. <br>
+    </p>
+    <div class="c-cta">
+      <div class='btn-group'>
+        <a href='/blog' class='btn btn-info btn-large'>View My Blogs</a>
+      </div>
+    </div>
+  </div>
+  <div class='span4'>
+    <img src="/static/img/avatar.jpg" alt="tuts hub" />
+  </div>
+</div>
+<div class="container" style="margin-top:10px;">
+  <h3>My Recent Blogs</h3>
+  <div id="testimonials" class="carousel slide">
+
+      <ol class="carousel-indicators">
+        <li data-target="#testimonials" data-slide-to="0" class="active"></li>
+        <li data-target="#testimonials" data-slide-to="1"></li>
+        <li data-target="#testimonials" data-slide-to="2"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        {% for blog in latest %}
+          <div class="item {% if blog == latest.0 %}active{% endif %}">
+            <h4 >
+              <a href = "{% url "detailblog" blog.id %}"> {{ blog.caption }} </a>
+            </h4>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+</div>
+{% endblock %}

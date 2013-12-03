@@ -1,0 +1,11 @@
+{% extends "blog_base.html" %}
+
+{% block title %}{{ blog.caption }}{% endblock%}
+
+{% block content%}
+<div id='content' class="hero-unit">
+  {# <h2>blog show</h2> #}
+  <h2>{{ blog.caption }}</h2>
+  <div>{{ blog.content }}</div>
+</div>
+{% endblock%}

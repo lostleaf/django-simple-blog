@@ -1,12 +1,3 @@
-
-.blog-content h2{
-	font-size:180%;
-	font-weight:normal;
-	margin:0 20px;
-	padding:1em 0;
-	text-align: center;
-}
-
 body{
   padding-top: 5em;
 }
@@ -38,3 +29,18 @@ body{
 #testimonials .carousel-inner .item{
   margin-left: 40px;
 }
+
+.blog-entry{
+  margin-bottom: 50px;
+  border-bottom: 4px double #ededed;
+  padding-bottom: 20px;
+}
+
+.blog-entry .content{
+  font-size: 16px;
+}
+
+.blog-entry .blog-footer{
+  margin-top: 24px;
+}
+

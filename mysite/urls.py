@@ -15,8 +15,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns((''),
-    (r'^blog/', include('blog.urls')),
+urlpatterns += patterns(('blog.views'),
+    url(r'^blog/$', 'blog_list', name = 'bloglist'),
+    url(r'^blog/blog/(?P<id>\d+)/$', 'blog_show', name = 'detailblog'),
+    url(r'^search$', 'search', name = 'search'),
 )
 
 urlpatterns += patterns((''),

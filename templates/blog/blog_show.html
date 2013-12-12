@@ -3,9 +3,31 @@
 {% block title %}{{ blog.caption }}{% endblock%}
 
 {% block content%}
-<div id='content' class="hero-unit blog-content">
-  {# <h2>blog show</h2> #}
-  <h2>{{ blog.caption }}</h2>
-  <div>{{ blog.content }}</div>
-</div>
+  <div class="blog-entry">
+    <div class="blog-header">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a><span class="divider">/</span></li>
+        <li><a href="/blog">Blogs</a><span class="divider">/</span></li>
+        <li class="active"> {{ blog.caption }} </li>
+      </ul>
+      <div class="page-header" style="margin-top: 50px;">
+        <h1 class = "text-center">{{ blog.caption }} </h1>
+      </div>
+    </div>
+
+    <div class='content'>
+      {{ blog.content }}
+    </div>
+
+    <footer class='muted blog-footer'>
+      <p>
+       {% for tag  in blog.tags.all  %}
+         <i class='icon-tag'></i>
+         <small>{{ tag }}</small>
+       {% endfor %}        
+      </p>
+      <p>{{ blog.publish_time.date }}</p>
+      
+    </footer>
+  </div>
 {% endblock%}

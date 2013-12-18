@@ -14,27 +14,47 @@
       <p class='muted'>{{ blogs.count }} results</p>      
     </div>
   </section>
-  {% for blog in blogs%}
-  <div class="blog-entry">
-    <h3>
-      <a href = "{% url "detailblog" blog.id %}"> {{ blog.caption }} </a>
-    </h3>
+  <div class="row-fluid">
+    <div class="span9">
+      {% for blog in blogs%}
+      <div class="blog-entry">
+        <h3>
+          <a href = "{% url "detailblog" blog.id %}"> {{ blog.caption }} </a>
+        </h3>
 
-    <div class='content'>
-      {{ blog.content }}
+        <p class="muted">
+          <i class="icon-user"></i><small> {{ blog.author }} </small>
+        </p>
+
+        <div class='content'>
+          {{ blog.content }}
+        </div>
+
+        <footer class='muted blog-footer'>
+          <p>
+            {% for tag  in blog.tags.all  %}
+              <a class='muted' href="{% url "searchtag" tag.id%}">
+                <i class='icon-tag'></i>
+                <small>{{ tag }}</small>
+              </a> 
+           {% endfor %}        
+          </p>
+          <p><i class="icon-time"></i><small>{{ blog.publish_time.date }}</small></p>
+          
+        </footer>
+      </div>
+      {% endfor %}
     </div>
-
-    <footer class='muted blog-footer'>
-      <p>
-       {% for tag  in blog.tags.all  %}
-         <i class='icon-tag'></i>
-         <small>{{ tag }}</small>
-       {% endfor %}        
-      </p>
-      <p>{{ blog.publish_time.date }}</p>
-      
-    </footer>
+    <div class="span2" id="aside">
+      <a class="btn" href="{% url "addblog" %}"><i class="icon-plus"></i>New Blog</a>
+      <h3>Tags</h3>
+      {% for tag in tags %}
+        <p>
+          <span><a href="{% url "searchtag" tag.id%}">{{ tag }}</a></span>
+        </p>
+      {% endfor%}
+    </div>
   </div>
-  {% endfor %}
+
 </div>
 {% endblock%}

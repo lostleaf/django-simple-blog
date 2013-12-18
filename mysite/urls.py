@@ -19,6 +19,10 @@ urlpatterns += patterns(('blog.views'),
     url(r'^blog/$', 'blog_list', name = 'bloglist'),
     url(r'^blog/blog/(?P<id>\d+)/$', 'blog_show', name = 'detailblog'),
     url(r'^search$', 'search', name = 'search'),
+    url(r'^blog/tag/(?P<id>\d+)/$', 'search_tag', name='searchtag'),
+    url(r'^blog/add/$', 'blog_add', name='addblog'),
+    url(r'^blog/(?P<id>\d+)/update/$', 'blog_update', name='updateblog'),
+    url(r'^blog/(?P<id>\w+)/del/$', 'blog_del', name='delblog'),
 )
 
 urlpatterns += patterns((''),

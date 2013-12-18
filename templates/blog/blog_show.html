@@ -3,31 +3,46 @@
 {% block title %}{{ blog.caption }}{% endblock%}
 
 {% block content%}
-  <div class="blog-entry">
-    <div class="blog-header">
-      <ul class="breadcrumb">
-        <li><a href="/">Home</a><span class="divider">/</span></li>
-        <li><a href="/blog">Blogs</a><span class="divider">/</span></li>
-        <li class="active"> {{ blog.caption }} </li>
-      </ul>
-      <div class="page-header" style="margin-top: 50px;">
-        <h1 class = "text-center">{{ blog.caption }} </h1>
-      </div>
-    </div>
+<div class="blog-entry">
 
-    <div class='content'>
-      {{ blog.content }}
-    </div>
+  <div class="blog-header">
 
-    <footer class='muted blog-footer'>
-      <p>
-       {% for tag  in blog.tags.all  %}
-         <i class='icon-tag'></i>
-         <small>{{ tag }}</small>
-       {% endfor %}        
-      </p>
-      <p>{{ blog.publish_time.date }}</p>
-      
-    </footer>
+    <ul class="breadcrumb">
+      <li><a href="/">Home</a><span class="divider">/</span></li>
+      <li><a href="/blog">Blogs</a><span class="divider">/</span></li>
+      <li class="active"> {{ blog.caption }} </li>
+    </ul>
+
+    <div class="page-header text-center" style="margin-top: 50px;">
+      <h1>{{ blog.caption }} </h1>
+      <i class="icon-user"></i><small> {{ blog.author }} </small>
+    </div>
   </div>
-{% endblock%}
+
+  <div class='content'>
+    {{ blog.content }}
+  </div>
+
+  <footer class='blog-footer row-fluid post-info'>
+    <div class="span3 muted">
+      <p>
+        {% for tag  in blog.tags.all  %}
+        <a class='muted' href="{% url "searchtag" tag.id%}">
+          <i class='icon-tag'></i>
+          <small>{{ tag }}</small>
+        </a> 
+        {% endfor %}        
+      </p>
+      <p>
+        <i class="icon-time"></i><small>{{ blog.publish_time.date }}
+      </p>
+    </div>
+
+    <div class="span2 offset7 text-right">
+      <a href="{% url "delblog" blog.id %}" title="delete"><i class="icon-trash"></i></a> 
+      <a href="{% url "updateblog" blog.id %}" title="edit"><i class="icon-edit"></i></a>
+    </div>
+
+   </footer>
+ </div>
+ {% endblock%}

@@ -1,0 +1,44 @@
+{% extends "blog_base.html" %}
+
+{% block title %}
+Add New Blog
+{% endblock title %}
+
+{% block content %}
+<div class="row-fluid">
+
+    <form action="" method="post">
+        {% csrf_token %} 
+        <div class="span8 offset3">
+            <div class="field">
+                <label for="id_caption">Title: </label>
+                {% if form.caption.errors %}
+                <div class="alert alert-error">
+                    {{ form.caption.errors }}          
+                </div>
+                {% endif %}
+                {{ form.caption }}
+            </div>
+            <div class="field">
+                <label for="id_tag">Tags</label>
+                {% if tag.tag_name.errors %}
+                <div class="alert alert-error">
+                    {{ tag.tag_name.errors }}
+                </div>
+                {% endif %}
+                {{ tag.tag_name }}
+            </div>
+            <div class="field">        
+                <label for="id_content">Content: </label>
+                {% if form.content.errors %}
+                <div class="alert alert-error">
+                    {{ form.content.errors }}
+                </div>
+                {% endif %}
+                {{ form.content }}
+            </div>
+            <input class="btn btn-primary" type="submit" value="save and add">
+        </div>
+    </form>
+</div>
+{% endblock content %}

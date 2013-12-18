@@ -44,3 +44,11 @@ body{
   margin-top: 24px;
 }
 
+#aside {
+  border-left: #ededed 4px solid;
+  padding-left: 35px;
+}
+
+#id_content{
+  width: 500px;
+}

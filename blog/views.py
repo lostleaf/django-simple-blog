@@ -45,6 +45,8 @@ def search_tag(request, id = ''):
   return render_to_response("blog_list.html", {"blogs": blogs, "htext": htext, "tags": tags})
 
 def blog_add(request):
+  if not request.user.is_authenticated():
+      return HttpResponseRedirect("/blog/")
   if request.method == 'POST':
     form = BlogForm(request.POST)
     tag  = TagForm(request.POST)
@@ -71,6 +73,8 @@ def blog_add(request):
                             context_instance=RequestContext(request))
 
 def blog_update(request, id=""):
+  if not request.user.is_authenticated():
+      return HttpResponseRedirect("/blog/")
   id = id
   if request.method == 'POST':
     form = BlogForm(request.POST)
@@ -121,6 +125,8 @@ def blog_update(request, id=""):
       context_instance=RequestContext(request))
 
 def blog_del(request, id=""):
+  if not request.user.is_authenticated():
+      return HttpResponseRedirect("/blog/")
   try:
     blog = Blog.objects.get(id=id)
   except Exception:

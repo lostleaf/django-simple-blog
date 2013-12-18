@@ -6,13 +6,16 @@ from django.http import Http404
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.models import User
 
 def blog_list(request):
   """docstring for blog_list"""
   blogs = Blog.objects.all()
   tags  = Tag.objects.all()
   htext = "Blogs"
-  return render_to_response("blog_list.html", {"blogs": blogs, "htext": htext, "tags": tags})
+  return render_to_response("blog_list.html", 
+    {"blogs": blogs, "htext": htext, "tags": tags, "user": request.user})
 
 def blog_show(request, id = ''):
  """docstring for blog_show"""
@@ -20,7 +23,7 @@ def blog_show(request, id = ''):
    blog = Blog.objects.get(id = id)
  except Blog.DoesNotExist:
    raise Http404
- return render_to_response("blog_show.html", {"blog": blog})
+ return render_to_response("blog_show.html", {"blog": blog, "user": request.user})
 
 def home(request):
   """docstring for home"""
@@ -127,3 +130,19 @@ def blog_del(request, id=""):
     return HttpResponseRedirect("/blog/")
   blogs = Blog.objects.all()
   return render_to_response("blog_list.html", {"blogs": blogs})
+
+def login(request):
+  if request.method == 'POST':
+    form = LoginForm(request.POST)
+    if form.is_valid():
+      data = form.cleaned_data
+      user=authenticate(username=data['username'],password=data['password'])
+      auth_login(request, user)
+      return HttpResponseRedirect("/blog/")
+
+  form = LoginForm()
+  return render_to_response('login.html', {'form': form}, context_instance=RequestContext(request))
+
+def logout(request):
+  auth_logout(request)
+  return HttpResponseRedirect("/blog/")

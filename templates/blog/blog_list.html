@@ -27,7 +27,7 @@
         </p>
 
         <div class='content'>
-          {{ blog.content }}
+          {{ blog.content|linebreaksbr }}
         </div>
 
         <footer class='muted blog-footer'>
@@ -46,13 +46,21 @@
       {% endfor %}
     </div>
     <div class="span2" id="aside">
-      <a class="btn" href="{% url "addblog" %}"><i class="icon-plus"></i>New Blog</a>
+      {% if user.is_authenticated %}
+        <a class="btn" href="{% url "addblog" %}"><i class="icon-plus"></i>New Blog</a>
+      {% endif %}
       <h3>Tags</h3>
       {% for tag in tags %}
         <p>
           <span><a href="{% url "searchtag" tag.id%}">{{ tag }}</a></span>
         </p>
       {% endfor%}
+      <h3>Utilities</h3>
+      {% if not user.is_authenticated %}
+        <a href="{% url "login" %}">login</a>
+      {% else %}
+        <a href="{% url "logout" %}">logout</a>
+      {% endif %}
     </div>
   </div>
 

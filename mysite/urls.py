@@ -23,6 +23,8 @@ urlpatterns += patterns(('blog.views'),
     url(r'^blog/add/$', 'blog_add', name='addblog'),
     url(r'^blog/(?P<id>\d+)/update/$', 'blog_update', name='updateblog'),
     url(r'^blog/(?P<id>\w+)/del/$', 'blog_del', name='delblog'),
+    url(r'^login/$', 'login', name = 'login'),
+    url(r'^logout/$', 'logout', name = 'logout'),
 )
 
 urlpatterns += patterns((''),

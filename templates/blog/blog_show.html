@@ -20,7 +20,7 @@
   </div>
 
   <div class='content'>
-    {{ blog.content }}
+    {{ blog.content|linebreaksbr }}
   </div>
 
   <footer class='blog-footer row-fluid post-info'>
@@ -37,12 +37,12 @@
         <i class="icon-time"></i><small>{{ blog.publish_time.date }}
       </p>
     </div>
-
-    <div class="span2 offset7 text-right">
-      <a href="{% url "delblog" blog.id %}" title="delete"><i class="icon-trash"></i></a> 
-      <a href="{% url "updateblog" blog.id %}" title="edit"><i class="icon-edit"></i></a>
-    </div>
-
+    {% if user.is_authenticated %}      
+      <div class="span2 offset7 text-right">
+        <a href="{% url "delblog" blog.id %}" title="delete"><i class="icon-trash"></i></a> 
+        <a href="{% url "updateblog" blog.id %}" title="edit"><i class="icon-edit"></i></a>
+      </div>    
+    {% endif %}
    </footer>
  </div>
  {% endblock%}
